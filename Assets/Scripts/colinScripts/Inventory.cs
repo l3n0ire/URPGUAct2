@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
 
     public bool Add(Item item)
     {
-        if(!item.isDefultItem)
+        if(!item.isDefaultItem)
         {
             if(items.Count >= space)
             {
@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
             }
             items.Add(item);
             // trigger event
-            if (onItemChangedCallback != null)
+            if(onItemChangedCallback != null)
                 onItemChangedCallback.Invoke();
             
         }

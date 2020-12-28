@@ -8,5 +8,10 @@ public class Item : ScriptableObject
     // override exisistin name field
     new public string name = "New Item";
     public Sprite icon = null;
-    public bool isDefultItem = false;
+    public bool isDefaultItem = false;
+
+    public virtual void Use()
+    {
+        Debug.Log("Using " + name);
+    }
 }
