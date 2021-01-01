@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 29681427}
   - component: {fileID: 29681428}
   - component: {fileID: 29681429}
+  - component: {fileID: 29681430}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -217,6 +218,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   focus: {fileID: 0}
+  controller: {fileID: 29681430}
+  speed: 6
+  turnSmoothTime: 0.1
 --- !u!114 &29681423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +318,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPrefab: {fileID: 5696975701268865691, guid: 03446b39aa80848108f60f7bbbc762d8, type: 3}
   target: {fileID: 341246552}
+--- !u!143 &29681430
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29681418}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &47699481 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8676527238564759982, guid: ae02a22f1b8d14810a92c3d05d1e9072, type: 3}

@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     public float zoomSpeed = 4f;
     public float minZoom = 5f;
     public float maxZoom = 15f;
-    public float yawSpeed = 100f;
+    public float yawSpeed = 500f;
     private float currentYaw = 0f;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
         currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
 
-        currentYaw -= Input.GetAxis("Horizontal") * yawSpeed * Time.deltaTime;
+        currentYaw += Input.GetAxis("Mouse X") * yawSpeed * Time.deltaTime;
     }
     // Update is called once per frame
     void LateUpdate()
