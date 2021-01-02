@@ -8,11 +8,18 @@ public class PlayerMotor : MonoBehaviour
 {
     NavMeshAgent agent;
     Transform target;
+    private bool isFirstPersonEnabled = false;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        // subscribe to event
+        CameraController.instance.onCameraChange += OnCameraChange;
+    }
+    void OnCameraChange(Camera currentCamera, bool isFirstPersonEnabled)
+    { 
+        this.isFirstPersonEnabled = isFirstPersonEnabled;
     }
     private void Update()
     {
@@ -22,10 +29,10 @@ public class PlayerMotor : MonoBehaviour
             FaceTarget();
         }
     }
-
-    // Update is called once per frame
     public void MoveToPoint(Vector3 point)
     {
+        // don't rotate when ranged mode is enabled
+        agent.updateRotation = !isFirstPersonEnabled;
         agent.SetDestination(point);
     }
 

@@ -19,12 +19,14 @@ public class PlayerStats : CharacterStats
         {
             armor.AddModifier(newItem.armorModifier);
             damage.AddModifier(newItem.damageModifier);
+            rangedDamage.AddModifier(newItem.rangedDamageModifier);
         }
         // remove modifier of old items
         if (oldItem != null)
         {
             armor.RemoveModifier(oldItem.armorModifier);
             damage.RemoveModifier(oldItem.damageModifier);
+            rangedDamage.RemoveModifier(newItem.rangedDamageModifier);
         }
 
     }

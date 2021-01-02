@@ -9,6 +9,7 @@ public class Equipment : Item
 
     public int armorModifier;
     public int damageModifier;
+    public int rangedDamageModifier;
 
     public override void Use()
     {
@@ -21,4 +22,4 @@ public class Equipment : Item
 
 }
 
-public enum EquipmentSlot { Head,Chest,Legs,Weapon,Shield, Feet}
+public enum EquipmentSlot { Head,Chest,Legs,Primary,Secondary, Feet}

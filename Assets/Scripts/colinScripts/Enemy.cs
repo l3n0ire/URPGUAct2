@@ -20,7 +20,7 @@ public class Enemy : Interactable
         if (playerCombat != null)
         {
             // tell player to attack enemy
-            playerCombat.Attack(myStats);
+            playerCombat.MeleeAttack(myStats);
         }
     }
 }

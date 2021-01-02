@@ -22,12 +22,25 @@ public class CharacterCombat : MonoBehaviour
     {
         attackCooldown -= Time.deltaTime;
     }
-    public void Attack(CharacterStats targetStats)
+    public void MeleeAttack(CharacterStats targetStats)
     {
        
         if (attackCooldown <= 0f)
         {
-            StartCoroutine(DoDamage(targetStats, attackDelay));
+            StartCoroutine(DoDamage(targetStats, attackDelay, myStats.damage));
+
+            if (OnAttack != null)
+                OnAttack();
+
+            attackCooldown = 1f / attackSpeed;
+        }
+    }
+    public void RangedAttack(CharacterStats targetStats)
+    {
+
+        if (attackCooldown <= 0f)
+        {
+            StartCoroutine(DoDamage(targetStats, attackDelay,myStats.rangedDamage));
 
             if (OnAttack != null)
                 OnAttack();
@@ -36,9 +49,9 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    IEnumerator DoDamage (CharacterStats stats, float delay)
+    IEnumerator DoDamage (CharacterStats stats, float delay, Stat damage)
     {
         yield return new WaitForSeconds(delay);
-        stats.TakeDamage(myStats.damage.GetValue());
+        stats.TakeDamage(damage.GetValue());
     }
 }

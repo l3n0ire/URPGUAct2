@@ -11,6 +11,7 @@ public class Stat
 
     private List<int> modifiers = new List<int>();
 
+    // returns the sum of all modifiers of a stat
     public int GetValue()
     {
         int finalValue = baseValue;

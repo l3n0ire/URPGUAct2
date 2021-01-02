@@ -17,12 +17,22 @@ public class PlayerController : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
+    private bool isFirstPersonEnabled = false;
+
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
+        CameraController.instance.onCameraChange += OnCameraChange;
         motor = GetComponent<PlayerMotor>();
 
+
+    }
+
+    void OnCameraChange(Camera currentCamera, bool isFirstPersonEnabled)
+    {
+        cam = currentCamera;
+        this.isFirstPersonEnabled = isFirstPersonEnabled;
     }
 
     // Update is called once per frame
@@ -32,7 +42,7 @@ public class PlayerController : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        /* left click
+        /* click on ground to move
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -56,23 +66,28 @@ public class PlayerController : MonoBehaviour
             // remove focus when player moves
             RemoveFocus();
 
+            
             // account for camera rotation
             float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             direction = Quaternion.Euler(0f, angle, 0f)*Vector3.forward;
 
+            // enable rotation if not ranged mode
+            if(!isFirstPersonEnabled)
+            {
+                // player rotation for third person only
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            }
+
             Vector3 moveDestination = transform.position + direction;
             motor.MoveToPoint(moveDestination);
-     
-            // player rotation
-            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
         }
 
 
 
-        // right click
-        if (Input.GetMouseButtonDown(1))
+        // left click to interact
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -90,6 +105,7 @@ public class PlayerController : MonoBehaviour
             }
             
         }
+
     }
     void SetFocus(Interactable newFocus)
     {
