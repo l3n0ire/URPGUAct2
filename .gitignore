@@ -62,3 +62,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Assets/Plugins/GitHub/Editor/x64/sfw_x64.dll
+Assets/Plugins/GitHub/Editor/x64.meta
