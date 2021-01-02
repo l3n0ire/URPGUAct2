@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class CameraCollisions : MonoBehaviour
 {
-float min_distance = 1.0f;
-    float max_distance = 10.0f;
+    public float min_distance = 1.0f;
+    public float max_distance = 10.0f;
     float smooth = 10.0f;
     Vector3 dolly_direction;
     float distance;

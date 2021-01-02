@@ -36,20 +36,42 @@ public class CameraController : MonoBehaviour
     private float currentYaw = 0f;
     private float currentZoom = 10f;
     private bool isFirstPersonEnabled = false;
-    
+
+    // daniel stuff
+
+    public GameObject camera_target;
+    public float camera_move_speed = 80.0f;
+    public float clamp_angle = 80.0f;
+    public float input_sensitivity = 150.0f;
+    float rotation_x = 0.0f;
+    float rotation_y = 0.0f;
+    float mouse_x;
+    float mouse_y;
+
+
+
 
 
     void Start()
     {
         mainCamera = GetComponent<Camera>();
         firstPersonCamera.enabled = false;
+
+        // daniel stuff
+        Vector3 rot = transform.localRotation.eulerAngles;
+        rotation_x = rot.x;
+        rotation_y = rot.y;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
+        /*
         currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
         currentYaw += Input.GetAxis("Mouse X") * yawSpeed * Time.deltaTime;
+        */
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -76,6 +98,18 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+
+        // daniel stuff
+        mouse_x = Input.GetAxis("Mouse X");
+        mouse_y = Input.GetAxis("Mouse Y");
+        rotation_x += mouse_x * input_sensitivity * Time.deltaTime;
+        rotation_y -= mouse_y * input_sensitivity * Time.deltaTime;
+        rotation_y = Mathf.Clamp(rotation_y, -clamp_angle, clamp_angle);
+        Quaternion localRotation = Quaternion.Euler(rotation_y, rotation_x, 0);
+        transform.rotation = localRotation;
+
+
+
     }
 
     void LateUpdate()
@@ -88,10 +122,18 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            transform.position = target.position - offset * currentZoom;
+            /*transform.position = target.position - offset * currentZoom;
             transform.LookAt(target.position + Vector3.up * pitch);
-            transform.RotateAround(target.position, Vector3.up, currentYaw);
+            transform.RotateAround(target.position, Vector3.up, currentYaw);*/
+
+            CameraUpdater();
         }
 
+    }
+    void CameraUpdater()
+    {
+        Transform targety = camera_target.transform;
+        float step = camera_move_speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, targety.position, step);
     }
 }
