@@ -827,13 +827,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158490828}
-  m_LocalRotation: {x: 0.39158675, y: 0.038564045, z: -0.040223047, w: 0.9184524}
-  m_LocalPosition: {x: 0, y: 3.92, z: -4.25}
+  m_LocalRotation: {x: 0.088218994, y: 0.048048653, z: -0.0020104772, w: 0.99493957}
+  m_LocalPosition: {x: 0, y: 4.71, z: -8.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2122015988}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 46.254, y: 3.261, z: -3.622}
+  m_LocalEulerAnglesHint: {x: 10.122, y: 5.553, z: 0.261}
 --- !u!114 &158490832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &159308156
 Transform:
   m_ObjectHideFlags: 0
@@ -5003,20 +5003,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db4aac3f55b746d88848a952c7d620d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 29681419}
+  firstPersonCameraObj: {fileID: 159308155}
   firstPersonCamera: {fileID: 159308159}
   mainCamera: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
-  firstPersonYawSpeed: 100
-  pitch: 2
-  zoomSpeed: 4
-  minZoom: 5
-  maxZoom: 15
-  yawSpeed: 500
   camera_target: {fileID: 29681418}
   camera_move_speed: 80
-  clamp_angle: 80
+  clamp_angle: 60
   input_sensitivity: 150
+  fp_clamp_angle: 20
+  fp_input_sensitivity: 150
 --- !u!4 &10684320227374839
 Transform:
   m_ObjectHideFlags: 0

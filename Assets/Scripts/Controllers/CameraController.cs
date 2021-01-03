@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     }
     #endregion
 
-    public Transform target;
+    public GameObject firstPersonCameraObj;
     public Camera firstPersonCamera;
     public Camera mainCamera;
 
@@ -25,26 +25,18 @@ public class CameraController : MonoBehaviour
     // currentCamera and isfirstPersonEnabled
     public event System.Action<Camera, bool> onCameraChange;
 
-    public Vector3 offset;
-    public float firstPersonYawSpeed = 100f;
-    public float pitch = 2f;
-    public float zoomSpeed = 4f;
-    public float minZoom = 5f;
-    public float maxZoom = 15f;
-    public float yawSpeed = 500f;
-
-    private float currentYaw = 0f;
-    private float currentZoom = 10f;
     private bool isFirstPersonEnabled = false;
-
-    // daniel stuff
 
     public GameObject camera_target;
     public float camera_move_speed = 80.0f;
     public float clamp_angle = 80.0f;
     public float input_sensitivity = 150.0f;
+    public float fp_clamp_angle = 20f;
+    public float fp_input_sensitivity = 150.0f;
     float rotation_x = 0.0f;
     float rotation_y = 0.0f;
+    float fp_rotation_x = 0.0f;
+    float fp_rotation_y = 0.0f;
     float mouse_x;
     float mouse_y;
 
@@ -54,7 +46,8 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        mainCamera = GetComponent<Camera>();
+        mainCamera = transform.GetChild(0).GetComponent<Camera>();
+        firstPersonCamera = firstPersonCameraObj.GetComponent<Camera>();
         firstPersonCamera.enabled = false;
 
         // daniel stuff
@@ -67,11 +60,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        /*
-        currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-        currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
-        currentYaw += Input.GetAxis("Mouse X") * yawSpeed * Time.deltaTime;
-        */
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -99,14 +87,7 @@ public class CameraController : MonoBehaviour
             }
         }
 
-        // daniel stuff
-        mouse_x = Input.GetAxis("Mouse X");
-        mouse_y = Input.GetAxis("Mouse Y");
-        rotation_x += mouse_x * input_sensitivity * Time.deltaTime;
-        rotation_y -= mouse_y * input_sensitivity * Time.deltaTime;
-        rotation_y = Mathf.Clamp(rotation_y, -clamp_angle, clamp_angle);
-        Quaternion localRotation = Quaternion.Euler(rotation_y, rotation_x, 0);
-        transform.rotation = localRotation;
+       
 
 
 
@@ -114,26 +95,32 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
+        mouse_x = Input.GetAxis("Mouse X");
+        mouse_y = Input.GetAxis("Mouse Y");
+
         if (isFirstPersonEnabled)
         {
-            float rotateSpeed = Input.GetAxis("Mouse X") * firstPersonYawSpeed * Time.deltaTime;
-            target.Rotate(Vector3.up * rotateSpeed);
 
+            fp_rotation_x += mouse_x * fp_input_sensitivity * Time.deltaTime;
+            fp_rotation_y -= mouse_y * fp_input_sensitivity * Time.deltaTime;
+            fp_rotation_y = Mathf.Clamp(fp_rotation_y, -fp_clamp_angle, fp_clamp_angle);
+            camera_target.transform.rotation = Quaternion.Euler(fp_rotation_y, fp_rotation_x, 0);
         }
         else
         {
-            /*transform.position = target.position - offset * currentZoom;
-            transform.LookAt(target.position + Vector3.up * pitch);
-            transform.RotateAround(target.position, Vector3.up, currentYaw);*/
-
+            rotation_x += mouse_x * input_sensitivity * Time.deltaTime;
+            rotation_y -= mouse_y * input_sensitivity * Time.deltaTime;
+            rotation_y = Mathf.Clamp(rotation_y, -clamp_angle, clamp_angle);
+            Quaternion localRotation = Quaternion.Euler(rotation_y, rotation_x, 0);
+            transform.rotation = localRotation;
             CameraUpdater();
         }
 
     }
     void CameraUpdater()
     {
-        Transform targety = camera_target.transform;
+        Transform target = camera_target.transform;
         float step = camera_move_speed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, targety.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
     }
 }
