@@ -16,9 +16,9 @@ public class CameraControllerTest : MonoBehaviour
 
     void Start()
     {
-        Vector3 rot = transform.localRotation.eulerAngles;
-        rotation_x = rot.x;
-        rotation_y = rot.y;
+        //Vector3 rot = transform.localRotation.eulerAngles;
+        //rotation_x = rot.x;
+        //rotation_y = rot.y;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
