@@ -54,8 +54,8 @@ public class CameraController : MonoBehaviour
         Vector3 rot = transform.localRotation.eulerAngles;
         rotation_x = rot.x;
         rotation_y = rot.y;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     private void Update()

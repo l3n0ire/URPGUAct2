@@ -9,7 +9,7 @@ BlendTree:
   m_Name: Locomotion
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -8945691123924629249, guid: e4e637075f1f441d8900fc459a1990f7, type: 3}
+    m_Motion: {fileID: 1882377834704583646, guid: 196432949bf4c4948af540b10fa65fc8, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -17,7 +17,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -7551964380084998518, guid: e4e637075f1f441d8900fc459a1990f7, type: 3}
+    m_Motion: {fileID: -8945691123924629249, guid: 196432949bf4c4948af540b10fa65fc8, type: 3}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -25,7 +25,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 8349542763059015795, guid: e4e637075f1f441d8900fc459a1990f7, type: 3}
+    m_Motion: {fileID: 8349542763059015795, guid: 196432949bf4c4948af540b10fa65fc8, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -93,7 +93,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerAnimator
+  m_Name: SkeletonAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: speedPercent
