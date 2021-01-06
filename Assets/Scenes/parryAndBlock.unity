@@ -1070,7 +1070,7 @@ MonoBehaviour:
   attackSpeed: 1
   attackDelay: 1
   lookRadius: 3
-  fov: 45
+  fov: 30
   attack: {fileID: 11400000, guid: 1ec3ba58ad6264e6b875381b1d5e6faa, type: 2}
   attackMaterial: {fileID: 2100000, guid: e55d5ff783b304dd9bcad7accf81e482, type: 2}
   parryMaterial: {fileID: 2100000, guid: a8d42b234274c4a9c85c7a729f05c5c3, type: 2}
