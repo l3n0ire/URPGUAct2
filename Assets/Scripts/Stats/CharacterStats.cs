@@ -4,12 +4,12 @@ public class CharacterStats : MonoBehaviour
 {
     public int maxHealth = 100;
     // can only set this value from within the class
-    public int currentHealth { get; private set; }
+    public float currentHealth { get; private set; }
     public Stat damage;
     public Stat armor;
     public Stat rangedDamage;
 
-    public event System.Action<int, int> OnHealthChanged;
+    public event System.Action<float, float> OnHealthChanged;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class CharacterStats : MonoBehaviour
             TakeDamage(10);
         }
     }
-    public void TakeDamage (int damage)
+    public void TakeDamage (float damage)
     {
         damage -= armor.GetValue();
         damage = Mathf.Clamp(damage, 0, int.MaxValue);

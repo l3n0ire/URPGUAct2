@@ -44,14 +44,14 @@ public class HealthUI : MonoBehaviour
         }
     }
 
-    void OnHealthChanged(int maxHealth, int currentHealth)
+    void OnHealthChanged(float maxHealth, float currentHealth)
     {
         if (ui != null)
         {
             ui.gameObject.SetActive(true);
             lastMadeVisibleTime = Time.time;
 
-            float healthPercent = currentHealth / (float)maxHealth;
+            float healthPercent = currentHealth / maxHealth;
             healthSlider.fillAmount = healthPercent;
             if (currentHealth <= 0)
             {
